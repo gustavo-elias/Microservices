@@ -1,4 +1,4 @@
-package com.tribal.persistenceabstraction;
+package com.tribal.persistenceabstraction.defaultimplementation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -13,16 +13,20 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.tribal.persistenceabstraction.CacheableObject;
+import com.tribal.persistenceabstraction.CacheableRelation;
+import com.tribal.persistenceabstraction.defaultimplementation.PersistenceAbstraction;
+
 public class PersistentAbstractionTest {
 
-	private PersistentAbstraction persistentAbstraction;
+	private PersistenceAbstraction persistentAbstraction;
 	private CacheableRelation relation, nullRelation;
 	private List<CacheableObject> relationElements, nullRelationElements;
 	private CacheableObject element1, element2;
 	
 	@Before
 	public void setUp() {
-		persistentAbstraction = new PersistentAbstraction();
+		persistentAbstraction = new PersistenceAbstraction();
 		relationElements = new ArrayList<CacheableObject>();
 		nullRelationElements = new ArrayList<CacheableObject>();
 		
@@ -33,6 +37,7 @@ public class PersistentAbstractionTest {
 		
 		relationElements.add(element1);
 		relationElements.add(element2);
+		
 		when(relation.getElements()).thenReturn(relationElements);
 		when(relation.contains(element1)).thenReturn(true);
 		when(relation.getRelatedElement(element1)).thenReturn(element2);
@@ -70,7 +75,7 @@ public class PersistentAbstractionTest {
 	@Test
 	public void addRelationShouldAddBothObjectsToTheListOfElementsAndTheRelationToTheCache() {
 		persistentAbstraction.addRelation(relation);
-		Collection<CacheableObject> relatedElements = (Collection<CacheableObject>) persistentAbstraction.retrieveConnections(element1);
+		Collection<CacheableObject> relatedElements = (Collection<CacheableObject>) persistentAbstraction.retrieveRelations(element1);
 		assertTrue(relatedElements.contains(element2));
 		assertEquals(1, relatedElements.size());
 	}
@@ -78,7 +83,7 @@ public class PersistentAbstractionTest {
 	@Test
 	public void addRelationWithNullElementShouldNotAddElementsOrRelationToTheCache() {
 		persistentAbstraction.addRelation(nullRelation);
-		Collection<CacheableObject> relatedElements = (Collection<CacheableObject>) persistentAbstraction.retrieveConnections(element1);
+		Collection<CacheableObject> relatedElements = (Collection<CacheableObject>) persistentAbstraction.retrieveRelations(element1);
 		assertEquals(0, relatedElements.size());
 	}
 }

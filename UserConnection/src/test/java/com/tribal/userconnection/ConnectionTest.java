@@ -60,7 +60,7 @@ public class ConnectionTest {
 	
 	@Test
 	public void getElementsShouldReturnListContainingBothUsersInTheRelation() {
-		List<CacheableObject> users = connection.getElements();
+		List<User> users = connection.getElements();
 		assertTrue(users.contains(user1));
 		assertTrue(users.contains(user2));
 		assertEquals(2, users.size());

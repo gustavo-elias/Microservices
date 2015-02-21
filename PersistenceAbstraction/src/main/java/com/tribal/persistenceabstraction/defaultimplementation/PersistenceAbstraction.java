@@ -1,10 +1,14 @@
-package com.tribal.persistenceabstraction;
+package com.tribal.persistenceabstraction.defaultimplementation;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-public class PersistentAbstraction implements Cacheable {
+import com.tribal.persistenceabstraction.Cacheable;
+import com.tribal.persistenceabstraction.CacheableObject;
+import com.tribal.persistenceabstraction.CacheableRelation;
+
+public class PersistenceAbstraction implements Cacheable {
     Collection<CacheableObject> cache = new HashSet<CacheableObject>();
     Collection<CacheableRelation> connectedElements = new HashSet<CacheableRelation>();
     
@@ -30,8 +34,7 @@ public class PersistentAbstraction implements Cacheable {
 		return false;
 	}
 
-	@SuppressWarnings("unchecked")
-	public <T extends CacheableObject> Collection<T> retrieveConnections(T element) {
+	public <T extends CacheableObject> Collection<T> retrieveRelations(T element) {
 		Collection<T> connections = new HashSet<T>();
 		for(CacheableRelation relation : connectedElements) {
 			if(relation.contains(element)) {
