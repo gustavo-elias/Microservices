@@ -8,7 +8,7 @@ public class PersistentAbstraction implements Cacheable {
     Collection<CacheableObject> cache = new HashSet<CacheableObject>();
     Collection<CacheableRelation> connectedElements = new HashSet<CacheableRelation>();
     
-	public boolean addElement(CacheableObject element) {
+    public <T extends CacheableObject> boolean addElement(T element) {
 		if(null != element && !cache.contains(element)){
 			cache.add(element);
 			return true;
@@ -16,7 +16,7 @@ public class PersistentAbstraction implements Cacheable {
 		return false;
 	}
 
-	public boolean addRelation(CacheableRelation relation) {
+	public <T extends CacheableRelation> boolean addRelation(T relation) {
 		if(null != relation && !connectedElements.contains(relation)) {
 			List<CacheableObject> relationElements = relation.getElements();
 			if(!relationElements.contains(null)) {
@@ -30,11 +30,12 @@ public class PersistentAbstraction implements Cacheable {
 		return false;
 	}
 
-	public Collection<CacheableObject> retrieveConnections(CacheableObject element) {
-		Collection<CacheableObject> connections = new HashSet<CacheableObject>();
+	@SuppressWarnings("unchecked")
+	public <T extends CacheableObject> Collection<T> retrieveConnections(T element) {
+		Collection<T> connections = new HashSet<T>();
 		for(CacheableRelation relation : connectedElements) {
 			if(relation.contains(element)) {
-				connections.add(relation.getRelatedElement(element));
+				connections.add((T) relation.getRelatedElement(element));
 			}
 		}
 		return connections;

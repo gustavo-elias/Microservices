@@ -1,6 +1,8 @@
 package com.tribal.userconnection;
 
-public class User {
+import com.tribal.persistenceabstraction.CacheableObject;
+
+public class User implements CacheableObject{
 
 	private String name;
 	private int id;

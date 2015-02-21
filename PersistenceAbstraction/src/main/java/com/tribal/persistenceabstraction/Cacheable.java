@@ -3,7 +3,7 @@ package com.tribal.persistenceabstraction;
 import java.util.Collection;
 
 public interface Cacheable {
-	public boolean addElement(CacheableObject element);
-	public boolean addRelation(CacheableRelation relation);
-	public Collection<CacheableObject> retrieveConnections(CacheableObject element);
+	public <T extends CacheableObject> boolean addElement(T element);
+	public <T extends CacheableRelation> boolean addRelation(T relation);
+	public <T extends CacheableObject> Collection<T> retrieveConnections(T element);
 }

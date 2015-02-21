@@ -1,6 +1,8 @@
 package com.tribal.persistenceabstraction;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -68,7 +70,7 @@ public class PersistentAbstractionTest {
 	@Test
 	public void addRelationShouldAddBothObjectsToTheListOfElementsAndTheRelationToTheCache() {
 		persistentAbstraction.addRelation(relation);
-		Collection<CacheableObject> relatedElements = persistentAbstraction.retrieveConnections(element1);
+		Collection<CacheableObject> relatedElements = (Collection<CacheableObject>) persistentAbstraction.retrieveConnections(element1);
 		assertTrue(relatedElements.contains(element2));
 		assertEquals(1, relatedElements.size());
 	}
@@ -76,7 +78,7 @@ public class PersistentAbstractionTest {
 	@Test
 	public void addRelationWithNullElementShouldNotAddElementsOrRelationToTheCache() {
 		persistentAbstraction.addRelation(nullRelation);
-		Collection<CacheableObject> relatedElements = persistentAbstraction.retrieveConnections(element1);
+		Collection<CacheableObject> relatedElements = (Collection<CacheableObject>) persistentAbstraction.retrieveConnections(element1);
 		assertEquals(0, relatedElements.size());
 	}
 }
