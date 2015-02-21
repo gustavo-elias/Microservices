@@ -1,0 +1,19 @@
+INDEX VERSION 1.127+D:\Personal\Github\Microservices\.metadata\.plugins\org.eclipse.jdt.core
+374833421.index
+1635968857.index
+898958383.index
+173099854.index
+246862827.index
+1114710922.index
+2263419941.index
+2590105891.index
+146049755.index
+3817815416.index
+1495235164.index
+3503004837.index
+3937578926.index
+3967133398.index
+3507434161.index
+2281395163.index
+733352801.index
+1024176895.index
